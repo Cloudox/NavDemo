@@ -18,10 +18,10 @@ import {
 } from 'react-native';
 
 class NavDemo extends Component {
-  onRightButtonPress = () => {
-    this.refs.nav.push({
-      title: 'From Right',
-      component: ForRightScene
+  onRightButtonPress = () => {// 导航栏右边按钮的响应方法
+    this.refs.nav.push({// 进入一个界面
+      title: 'From Right', /* 导航栏标题 */
+      component: ForRightScene /* 要进入的组件 */
     })
   }
 
@@ -31,10 +31,10 @@ class NavDemo extends Component {
         ref="nav"
         style={styles.container}
         initialRoute={{
-          component: HomeScene,
-          title: 'NavigatorIOS Demo',
-          rightButtonTitle: 'MORE!',
-          onRightButtonPress: this.onRightButtonPress
+          component: HomeScene, /* 首页组件 */
+          title: 'NavigatorIOS Demo', /* 导航栏标题 */
+          rightButtonTitle: 'MORE!', /* 导航栏右侧按钮 */
+          onRightButtonPress: this.onRightButtonPress /* 点击右侧按钮的响应 */
         }} />
     );
   }
@@ -42,18 +42,29 @@ class NavDemo extends Component {
 
 class HomeScene extends Component {
   
-  onPress = () =>  {
-    this.props.navigator.push({
-      title: 'From TouchableHighlight',
-      component: ForTouchScene
+  onPress = () =>  {// 点击方法
+    this.props.navigator.push({ /* 进入一个界面 */
+      title: 'From TouchableHighlight', /* 导航栏标题 */
+      component: ForTouchScene /* 要进入的组件 */
+    });
+  }
+
+  onSecondPress = () =>  {// 点击方法
+    this.props.navigator.push({ /* 进入一个界面 */
+      title: 'My Component', /* 导航栏标题 */
+      component: MyComponent /* 要进入的组件 */
     });
   }
 
   render() {
     return (
       <View style={[styles.scene, {backgroundColor: '#DAF6FF'}]}>
-        <TouchableHighlight onPress={this.onPress}>
+        {/* 可点击会高亮的元素及其响应 */}
+        <TouchableHighlight onPress={this.onPress} underlayColor='#FFFFFF'> 
           <Text> Welcome to the NavigatorIOS Demo. Press here!</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this.onSecondPress}> 
+          <Text> This is my Component. Press here!</Text>
         </TouchableHighlight>
       </View>
     );
@@ -75,6 +86,16 @@ class ForTouchScene extends Component {
     return (
       <View style={[styles.scene, {backgroundColor: '#ECF6E8'}]}>
         <Text>You came here from the TouchableHighlight!</Text>
+      </View>
+    );
+  }
+}
+
+class MyComponent extends Component {
+  render() {
+    return (
+      <View style={[styles.scene, {backgroundColor: '#767676'}]}>
+        <Text>不能住在你心里，都是客死异乡。</Text>
       </View>
     );
   }
